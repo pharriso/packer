@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: Configure eth0 network interface 
+    blockinfile:
+      path: /etc/sysconfig/network-scripts/ifcfg-eth0
+      block: |
+        BOOTPROTO=static
+        ONBOOT=yes
+        NETMASK=255.255.255.0
+        GATEWAY=192.168.122.1
+        DNS1=192.168.122.1
+
+  - name: Delete ssh host keys
+    shell: rm -rf /etc/ssh/ssh_host_*
+ 
+  - name: Delete udev rules file
+    shell: rm -rf /etc/udev/rules.d/70-*
+
+  - name: Set hostname
+    shell: hostnamectl set-hostname localhost.localdomain
+      

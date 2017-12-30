@@ -1,0 +1,39 @@
+{
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "rhel7_template.yml"
+    }
+  ],
+  "builders":
+  [
+    {
+      "type": "qemu",
+      "iso_url": "/repo/rhel-server-7.4-x86_64-dvd.iso",
+      "iso_checksum": "227880f6a3cee6b745e7f204586c8988",
+      "iso_checksum_type": "md5",
+      "output_directory": "/var/lib/libvirt/images/templates",
+      "shutdown_command": "shutdown -P now",
+      "disk_size": 40000,
+      "format": "qcow2",
+      "headless": true,
+      "accelerator": "kvm",
+      "http_directory": "/repo",
+      "http_port_min": 10082,
+      "http_port_max": 10089,
+      "ssh_host_port_min": 2222,
+      "ssh_host_port_max": 2229,
+      "ssh_username": "root",
+      "ssh_password": "",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "30m",
+      "vm_name": "template2",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<up><up><tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/rhel7_ks.cfg<enter><wait>"
+      ]
+    }
+  ]
+}

@@ -26,9 +26,9 @@
   - name: Subscribe to RHN
     redhat_subscription:
       state: present
-      activationkey: rhn-gps-pharriso
-      org_id: 5318211
-      pool_ids: 8a85f9815dc5571e015dc5772a0341d5
+      activationkey: 
+      org_id: 
+      pool_ids: 
       
   - name: Enable repos
     shell: subscription-manager repos --disable "*" --enable rhel-7-server-rpms
